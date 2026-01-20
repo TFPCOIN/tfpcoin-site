@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
 
 import { TOKEN, WALLET, LINKS } from "@/lib/config";
-import { track } from "@/lib/analytics";
+import { trackEvent } from '../lib/analytics'
 
 // Privy embedded wallet (optional)
 import { usePrivy } from "@privy-io/react-auth";
