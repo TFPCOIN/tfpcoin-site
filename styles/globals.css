@@ -1,0 +1,163 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, #0f2027, #000000);
+  color: #ffffff;
+}
+
+/* Simple modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.modal {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 22px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.modalHeader strong {
+  letter-spacing: 0.5px;
+}
+
+.iconBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.pillRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.92rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0, 245, 255, 0.14);
+  border: 1px solid rgba(0, 245, 255, 0.22);
+  font-size: 0.92rem;
+}
+
+.muted {
+  color: #b3b3b3;
+}
+
+header {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+header p {
+  max-width: 600px;
+  margin: 20px auto;
+  color: #b3b3b3;
+}
+
+.cta-buttons a {
+  display: inline-block;
+  margin: 10px;
+  padding: 14px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00f5ff, #7f00ff);
+  color: #000;
+}
+
+section {
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  background: #000;
+  color: #777;
+}
+
+.roadmap-item {
+  margin-bottom: 20px;
+}
+
+.tokenomics li {
+  margin-bottom: 10px;
+}
+
+input,
+button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button {
+  background: linear-gradient(135deg, #00f5ff, #7f00ff);
+  font-weight: bold;
+  cursor: pointer;
+}
