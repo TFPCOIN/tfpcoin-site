@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TFPCOIN | The Future of Digital Value</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #0f2027, #000000);
+      color: #ffffff;
+    }
+    header { padding: 40px 20px; text-align: center; }
+    header h1 { font-size: 3rem; letter-spacing: 2px; }
+    header p { max-width: 600px; margin: 20px auto; color: #b3b3b3; }
+    .cta-buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      background: linear-gradient(135deg, #00f5ff, #7f00ff);
+      color: #000;
+    }
+    section { padding: 60px 20px; max-width: 1100px; margin: auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,245,255,0.1);
+    }
+    h2 { text-align: center; margin-bottom: 40px; }
+    footer { text-align: center; padding: 30px; background: #000; color: #777; }
+    .roadmap-item { margin-bottom: 20px; }
+    input, button { padding: 12px; border-radius: 8px; border: none; width: 100%; margin-top: 10px; }
+    button { background: linear-gradient(135deg, #00f5ff, #7f00ff); font-weight: bold; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="TFPCOIN Logo" style="max-width:220px; margin-bottom:18px;" />
+  <h1>TFPCOIN</h1>
+  <p>The Future of Digital Value. A next-generation Web3 ecosystem built for speed, transparency, and community ownership.</p>
+  <div class="cta-buttons">
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#whitepaper">Whitepaper</a>
+    <a href="#" onclick="connectWallet(); return false;">Connect Wallet</a>
+    <!-- Pre-filled so it works even if JS is blocked -->
+    <a id="buyBtn" href="https://quickswap.exchange/#/swap?inputCurrency=POL&outputCurrency=0x59EB0583C532c0EF4e887308d8D477e48d02f7F8" target="_blank" rel="noopener">Buy TFPCOIN</a>
+    <a id="chartBtn" href="https://dexscreener.com/polygon/0x59EB0583C532c0EF4e887308d8D477e48d02f7F8" target="_blank" rel="noopener">View Chart</a>
+  </div>
+  <p id="walletAddress" style="margin-top:15px;color:#00f5ff;"></p>
+</header>
+
+<section id="about">
+  <h2>About TFPCOIN</h2>
+  <p style="text-align:center; max-width:800px; margin:auto;">TFPCOIN is a decentralized digital asset designed to empower creators, investors, and communities through secure blockchain technology. Built with scalability and accessibility in mind, TFPCOIN bridges innovation and real-world utility.</p>
+</section>
+
+<section id="contract">
+  <h2>Contract & Links</h2>
+  <div class="card" style="max-width:800px; margin:0 auto;">
+    <p style="margin:0 0 10px 0;"><strong>Network:</strong> Polygon (POL)</p>
+    <p style="margin:0 0 10px 0;"><strong>TFPCOIN Contract:</strong></p>
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <code id="tokenAddress" style="padding:10px 12px; border-radius:10px; background:rgba(255,255,255,0.06); display:inline-block; word-break:break-all; flex:1; min-width:260px;">0x59EB0583C532c0EF4e887308d8D477e48d02f7F8</code>
+      <button type="button" onclick="copyTokenAddress()" style="width:auto; padding:12px 16px;">Copy</button>
+    </div>
+    <p style="margin:12px 0 0 0; color:#b3b3b3;">Buy and Chart buttons are set to your contract automatically.</p>
+  </div>
+</section>
+
+<section id="tokenomics">
+  <h2>Tokenomics</h2>
+  <div class="grid tokenomics">
+    <div class="card"><strong>Total Supply:</strong><br>1,000,000,000 TFPC</div>
+    <div class="card"><strong>Liquidity:</strong><br>40%</div>
+    <div class="card"><strong>Community & Rewards:</strong><br>30%</div>
+    <div class="card"><strong>Team & Development:</strong><br>20%</div>
+    <div class="card"><strong>Marketing:</strong><br>10%</div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2>Roadmap</h2>
+  <div class="card">
+    <div class="roadmap-item"><strong>Phase 1:</strong> Brand launch, website, smart contract deployment</div>
+    <div class="roadmap-item"><strong>Phase 2:</strong> Community growth, liquidity launch, marketing push</div>
+    <div class="roadmap-item"><strong>Phase 3:</strong> Exchange listings, partnerships, staking utility</div>
+    <div class="roadmap-item"><strong>Phase 4:</strong> Ecosystem expansion & governance</div>
+  </div>
+</section>
+
+<section id="whitepaper">
+  <h2>Whitepaper</h2>
+  <p style="text-align:center;">Download the official TFPCOIN whitepaper to explore the full vision, utility, and technical framework.</p>
+  <div style="text-align:center;">
+    <a class="cta-buttons" href="TFPCOIN_Whitepaper.pdf" target="_blank" rel="noopener">Download Whitepaper (PDF)</a>
+  </div>
+</section>
+
+<section id="newsletter">
+  <h2>Join the Community</h2>
+  <div class="card" style="max-width:400px; margin:auto;">
+    <form action="https://formspree.io/f/xyzzabcd" method="POST">
+      <input type="email" name="email" placeholder="Enter your email" required />
+      <button type="submit">Join Waitlist</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2026 TFPCOIN. All Rights Reserved. | Web3 Powered
+</footer>
+
+<script>
+  function copyTokenAddress() {
+    const addr = (document.getElementById('tokenAddress')?.innerText || '').trim();
+    navigator.clipboard.writeText(addr).then(() => {
+      alert('Contract address copied!');
+    }).catch(() => {
+      alert('Could not copy automatically. Please highlight and copy the address.');
+    });
+  }
+
+  async function connectWallet() {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        document.getElementById('walletAddress').innerText = 'Connected: ' + accounts[0];
+      } catch (error) {
+        alert('Connection request rejected');
+      }
+    } else {
+      alert('MetaMask not detected. Please install MetaMask.');
+    }
+  }
+</script>
+
+</body>
+</html>
