@@ -272,7 +272,43 @@
     }
   </style>
 </head>
+<!-- MERCH MODAL -->
+<div id="merchOverlay" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.72);
+  z-index:10000;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
+">
+  <div style="
+    width:min(980px,96vw);
+    max-height:92vh;
+    overflow:auto;
+    background:#0b0f14;
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:18px;
+    padding:16px;
+  ">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+      <h3 style="margin:0;">TFPCOIN Merch</h3>
+      <button onclick="closeMerchModal()" style="
+        background:transparent;border:none;color:#fff;font-size:20px;cursor:pointer;
+      ">✕</button>
+    </div>
 
+    <p style="margin:10px 0;color:rgba(255,255,255,0.7);font-size:13px;">
+      Secure checkout powered by Shopify.
+    </p>
+
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;">
+      <div id="product-component-1769653146260"></div>
+    </div>
+  </div>
+</div>
+  
 <body>
   <div class="wrap">
 
