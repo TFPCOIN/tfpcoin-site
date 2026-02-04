@@ -308,6 +308,68 @@
     </div>
   </div>
 </div>
+<script>
+  function openMerchModal() {
+    const overlay = document.getElementById("merchOverlay");
+    overlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    renderShopifyOnce();
+  }
+
+  function closeMerchModal() {
+    const overlay = document.getElementById("merchOverlay");
+    overlay.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  // Close when clicking outside the box
+  document.getElementById("merchOverlay")?.addEventListener("click", (e) => {
+    if (e.target.id === "merchOverlay") closeMerchModal();
+  });
+
+  // Load Shopify + render product ONCE (prevents bugs)
+  let shopifyMounted = false;
+
+  function renderShopifyOnce() {
+    if (shopifyMounted) return;
+
+    const mountNode = document.getElementById("product-component-1769653146260");
+    if (!mountNode) return;
+
+    const scriptURL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
+
+    function mount() {
+      const client = ShopifyBuy.buildClient({
+        domain: "z4qefk-85.myshopify.com",
+        storefrontAccessToken: "31f257118ca68b69b2444216cdeb80d7",
+      });
+
+      ShopifyBuy.UI.onReady(client).then(function (ui) {
+        ui.createComponent("product", {
+          id: "10360105107758",
+          node: mountNode,
+          moneyFormat: "%24%7B%7Bamount%7D%7D",
+          options: {
+            product: { buttonDestination: "checkout" }
+          }
+        });
+
+        shopifyMounted = true;
+      });
+    }
+
+    if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+      mount();
+    } else {
+      const s = document.createElement("script");
+      s.async = true;
+      s.src = scriptURL;
+      s.onload = mount;
+      document.head.appendChild(s);
+    }
+  }
+</script>
+
   
 <body>
   <div class="wrap">
