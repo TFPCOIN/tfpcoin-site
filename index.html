@@ -3,242 +3,751 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TFPCOIN | The Future of Digital Value</title>
+  <title>TFPCOIN | Polygon Token</title>
+
   <style>
-    body {
-      margin: 0;
+    :root{
+      --bg:#070a10;
+      --card: rgba(255,255,255,0.06);
+      --stroke: rgba(255,255,255,0.14);
+      --muted: rgba(255,255,255,0.72);
+      --text:#ffffff;
+      --grad: linear-gradient(135deg, #00f5ff, #7f00ff);
+      --shadow: 0 18px 70px rgba(0,0,0,0.55);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
       font-family: Arial, Helvetica, sans-serif;
       background: radial-gradient(circle at top, #0f2027, #000000);
-      color: #ffffff;
+      color: var(--text);
     }
-    header { padding: 40px 20px; text-align: center; }
-    header h1 { font-size: 3rem; letter-spacing: 2px; }
-    header p { max-width: 600px; margin: 20px auto; color: #b3b3b3; }
-    .cta-buttons a {
-      display: inline-block;
-      margin: 10px;
-      padding: 14px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      background: linear-gradient(135deg, #00f5ff, #7f00ff);
-      color: #000;
+
+    a{ color: inherit; }
+
+    .wrap{
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
     }
-    section { padding: 60px 20px; max-width: 1100px; margin: auto; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-    .card {
+
+    /* Header */
+    header{
+      padding: 28px 0 8px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 260px;
+    }
+
+    .brand img{
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: rgba(255,255,255,0.08);
+      border:1px solid var(--stroke);
+    }
+
+    .brand h1{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+    .brand p{
+      margin:2px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      text-decoration:none;
+      font-weight: 700;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ opacity: 0.95; }
+
+    .btn.primary{
+      background: var(--grad);
+      border: none;
+      color: #06060a;
+    }
+
+    .hero{
+      margin-top: 18px;
+      padding: 22px;
+      border: 1px solid var(--stroke);
       background: rgba(255,255,255,0.05);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 20px rgba(0,245,255,0.1);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
-    h2 { text-align: center; margin-bottom: 40px; }
-    footer { text-align: center; padding: 30px; background: #000; color: #777; }
-    .roadmap-item { margin-bottom: 20px; }
-    input, button { padding: 12px; border-radius: 8px; border: none; width: 100%; margin-top: 10px; }
-    button { background: linear-gradient(135deg, #00f5ff, #7f00ff); font-weight: bold; cursor: pointer; }
+
+    .hero h2{
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .hero p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 820px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    }
+
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .muted{ color: var(--muted); }
+
+    code{
+      display:block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.35);
+      word-break: break-all;
+    }
+
+    .pillrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    .pill{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 700;
+    }
+
+    .pill.good{ background: rgba(0,255,180,0.10); }
+    .pill.warn{ background: rgba(255,170,0,0.10); }
+
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 620px){
+      .two{ grid-template-columns: 1fr; }
+    }
+
+    .line{
+      height: 1px;
+      background: rgba(255,255,255,0.10);
+      margin: 14px 0;
+    }
+
+    .list{
+      margin: 10px 0 0 18px;
+      color: rgba(255,255,255,0.85);
+    }
+    .list li{ margin-bottom: 8px; }
+
+    footer{
+      margin-top: 22px;
+      text-align:center;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+    }
+
+    /* Modal */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .overlay.open{ display:flex; }
+
+    .modal{
+      width: min(980px, 96vw);
+      max-height: 92vh;
+      overflow: hidden;
+      background: #0b0f14;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .modalhead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .modalhead h3{
+      margin:0;
+      font-size: 16px;
+    }
+
+    .modalclose{
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 6px 10px;
+    }
+
+    .modalbody{
+      padding: 14px 16px 16px;
+    }
+
+    iframe.swapframe{
+      width: 100%;
+      height: min(72vh, 680px);
+      border: 0;
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .small{
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.45;
+    }
   </style>
 </head>
+
 <body>
+  <div class="wrap">
 
-<header>
-  <img src="logo.png" alt="TFPCOIN Logo" style="max-width:220px; margin-bottom:18px;" />
-  <h1>TFPCOIN</h1>
-  <p>The Future of Digital Value. A next-generation Web3 ecosystem built for speed, transparency, and community ownership.</p>
-  <div class="cta-buttons">
-    <a href="#tokenomics">Tokenomics</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#whitepaper">Whitepaper</a>
-    <a href="#" onclick="connectWallet(); return false;">Connect Wallet</a>
-    <!-- Pre-filled so it works even if JS is blocked -->
-    <a id="buyBtn" href="#" onclick="openBuyModal(); return false;" rel="noopener">Buy TFPCOIN</a>
-    <a id="chartBtn" href="https://dexscreener.com/polygon/0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B" target="_blank" rel="noopener">View Chart</a>
-  </div>
-  <p id="walletAddress" style="margin-top:15px;color:#00f5ff;"></p>
-</header>
+    <header>
+      <div class="topbar">
+        <div class="brand">
+          <img src="assets/logo.png" alt="TFPCOIN Logo" />
+          <div>
+            <h1>TFPCOIN</h1>
+            <p>Polygon Token • Official Website</p>
+          </div>
+        </div>
 
-<section id="about">
-  <h2>About TFPCOIN</h2>
-  <p style="text-align:center; max-width:800px; margin:auto;">TFPCOIN is a decentralized digital asset designed to empower creators, investors, and communities through secure blockchain technology. Built with scalability and accessibility in mind, TFPCOIN bridges innovation and real-world utility.</p>
-</section>
-
-<section id="contract">
-  <h2>Contract & Links</h2>
-  <div class="card" style="max-width:800px; margin:0 auto;">
-    <p style="margin:0 0 10px 0;"><strong>Network:</strong> Polygon (POL)</p>
-    <p style="margin:0 0 10px 0;"><strong>TFPCOIN Contract:</strong></p>
-    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-      <code id="tokenAddress" style="padding:10px 12px; border-radius:10px; background:rgba(255,255,255,0.06); display:inline-block; word-break:break-all; flex:1; min-width:260px;">0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B</code>
-      <button type="button" onclick="copyTokenAddress()" style="width:auto; padding:12px 16px;">Copy</button>
-    </div>
-    <p style="margin:12px 0 0 0; color:#b3b3b3;">Buy and Chart buttons are set to your contract automatically.</p>
-  </div>
-</section>
-
-<section id="tokenomics">
-  <h2>Tokenomics</h2>
-  <div class="grid tokenomics">
-    <div class="card"><strong>Total Supply:</strong><br>1,000,000,000 TFPC</div>
-    <div class="card"><strong>Liquidity:</strong><br>40%</div>
-    <div class="card"><strong>Community & Rewards:</strong><br>30%</div>
-    <div class="card"><strong>Team & Development:</strong><br>20%</div>
-    <div class="card"><strong>Marketing:</strong><br>10%</div>
-  </div>
-</section>
-
-<section id="roadmap">
-  <h2>Roadmap</h2>
-  <div class="card">
-    <div class="roadmap-item"><strong>Phase 1:</strong> Brand launch, website, smart contract deployment</div>
-    <div class="roadmap-item"><strong>Phase 2:</strong> Community growth, liquidity launch, marketing push</div>
-    <div class="roadmap-item"><strong>Phase 3:</strong> Exchange listings, partnerships, staking utility</div>
-    <div class="roadmap-item"><strong>Phase 4:</strong> Ecosystem expansion & governance</div>
-  </div>
-</section>
-
-<section id="whitepaper">
-  <h2>Whitepaper</h2>
-  <p style="text-align:center;">Download the official TFPCOIN whitepaper to explore the full vision, utility, and technical framework.</p>
-  <div style="text-align:center;">
-    <a class="cta-buttons" href="TFPCOIN_Whitepaper.pdf" target="_blank" rel="noopener">Download Whitepaper (PDF)</a>
-  </div>
-</section>
-
-<section id="newsletter">
-  <h2>Join the Community</h2>
-  <div class="card" style="max-width:400px; margin:auto;">
-    <form action="https://formspree.io/f/xyzzabcd" method="POST">
-      <input type="email" name="email" placeholder="Enter your email" required />
-      <button type="submit">Join Waitlist</button>
-    </form>
-  </div>
-</section>
-
-
-<!-- ✅ BUY MODAL with EMBEDDED SWAP -->
-<div id="buyModal" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.75);
-  z-index:9999;
-  justify-content:center;
-  align-items:center;
-  padding:18px;
-">
-  <div style="
-    background:#111;
-    padding:18px;
-    border-radius:18px;
-    width:100%;
-    max-width:820px;
-    border:1px solid rgba(255,255,255,0.15);
-  ">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-      <div>
-        <h2 style="margin:0;">Buy TFPCOIN</h2>
-        <div style="color:#bdbdbd;font-size:14px;margin-top:6px;">
-          Swap crypto to TFPCOIN right here, or open QuickSwap in a new tab.
+        <div class="btnrow">
+          <button class="btn primary" id="btnBuy">Buy TFPCOIN</button>
+          <button class="btn" id="btnMerch">Buy Merch</button>
+          <a class="btn" href="assets/TFPCOIN_Whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a>
+          <button class="btn" id="btnConnect">Connect Wallet</button>
         </div>
       </div>
-      <button type="button" onclick="closeBuyModal()" style="background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.18); padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:bold;">✕ Close</button>
-    </div>
 
-    <div style="display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px;">
-      <div style="border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px;">
-        <div style="font-weight:900;">Embedded Swap (Uniswap)</div>
-        <div style="color:#bdbdbd;font-size:14px;margin-top:6px;">
-          Default: <b>MATIC → TFPCOIN</b> on Polygon.
+      <div class="hero">
+        <h2>The Future of Digital Value</h2>
+        <p>
+          TFPCOIN is a Polygon-based token built for community, utility, and real-world digital commerce.
+          Swap TFPCOIN instantly, view the contract, and shop official merch directly from this site.
+        </p>
+
+        <div class="pillrow" style="margin-top:14px;">
+          <span class="pill" id="pillWallet">Wallet: Not connected</span>
+          <span class="pill" id="pillNetwork">Network: Not checked</span>
+          <span class="pill good">Network: Polygon</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Contract & Links</h3>
+        <div class="muted">TFPCOIN Contract (Polygon)</div>
+        <code id="tokenAddr">0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B</code>
+
+        <div class="btnrow" style="justify-content:flex-start; margin-top:12px;">
+          <button class="btn" id="btnCopy">Copy Contract</button>
+          <button class="btn" id="btnAddMM">Add TFPCOIN to MetaMask</button>
+          <a class="btn" id="btnScan" target="_blank" rel="noopener">View on PolygonScan</a>
         </div>
 
-        <div id="swapWidget" style="margin-top:10px;"></div>
+        <div class="line"></div>
 
-        <a id="buySwapBtn" target="_blank" rel="noopener"
-           style="display:inline-flex; align-items:center; justify-content:center; width:100%; margin-top:10px;
-                  padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.18);
-                  background:rgba(255,255,255,0.06); color:#fff; text-decoration:none; font-weight:bold;">
-          If embed fails, open QuickSwap
-        </a>
+        <div class="two">
+          <div class="card" style="box-shadow:none;">
+            <h3 style="margin-bottom:6px;">Live Price</h3>
+            <div class="muted">TFPCOIN (USD)</div>
+            <div style="font-size:26px;font-weight:900;margin-top:6px;" id="priceUsd">—</div>
+            <div class="small" id="priceNote">Pulling from DexScreener…</div>
+          </div>
 
-        <div style="color:#bdbdbd;font-size:12px;margin-top:12px;">
-          Contract: <span style="font-family:monospace;">0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B</span>
+          <div class="card" style="box-shadow:none;">
+            <h3 style="margin-bottom:6px;">Market Cap</h3>
+            <div class="muted">Estimated (USD)</div>
+            <div style="font-size:26px;font-weight:900;margin-top:6px;" id="mcUsd">—</div>
+            <div class="small">Shows when DexScreener indexes the pair.</div>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        <h3 style="margin-bottom:6px;">Merch Conversion</h3>
+        <div class="muted">Jersey price: <b>$70</b></div>
+        <div style="margin-top:8px;font-size:18px;font-weight:900;">
+          ≈ <span id="tfpFor70">—</span> TFPCOIN
+        </div>
+        <div class="small">
+          This updates automatically from your live TFPCOIN price (DexScreener).
+          If price is unavailable, it stays as “—”.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>How to Buy TFPCOIN</h3>
+        <ol class="list">
+          <li>Click <b>Buy TFPCOIN</b> (top button).</li>
+          <li>Connect MetaMask / wallet in the swap widget.</li>
+          <li>Make sure you are on <b>Polygon</b> network.</li>
+          <li>Swap POL / WMATIC → TFPCOIN.</li>
+          <li>Click <b>Add TFPCOIN to MetaMask</b> (this page) to display your balance.</li>
+        </ol>
+
+        <div class="line"></div>
+
+        <h3>Trust Indicators</h3>
+        <div class="pillrow">
+          <span class="pill good">Contract: Verified (recommended)</span>
+          <span class="pill warn">Audit: Coming Soon</span>
+          <span class="pill warn">Liquidity Lock: Coming Soon</span>
+        </div>
+
+        <div class="line"></div>
+
+        <h3>Quick Actions</h3>
+        <div class="btnrow" style="justify-content:flex-start;">
+          <button class="btn" id="btnSwitch">Switch to Polygon</button>
+          <a class="btn" id="btnChart" target="_blank" rel="noopener">View Chart</a>
+        </div>
+
+        <p class="small" style="margin-top:12px;">
+          If any widget shows “unsupported token”, QuickSwap typically supports Polygon tokens faster than Uniswap.
+        </p>
+      </div>
+
+    </div>
+
+    <footer>
+      © 2026 TFPCOIN. All Rights Reserved.
+    </footer>
+
+  </div>
+
+  <!-- BUY TFPCOIN MODAL (QuickSwap) -->
+  <div class="overlay" id="swapOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
+      <div class="modalhead">
+        <h3 id="swapTitle">Buy TFPCOIN</h3>
+        <button class="modalclose" id="swapClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modalbody">
+        <div class="small" style="margin-bottom:10px;">
+          Swap on Polygon via QuickSwap. If the widget doesn’t load, use the “View Chart” link or open QuickSwap directly.
+        </div>
+        <iframe class="swapframe" id="swapFrame" title="QuickSwap Swap" allow="clipboard-write; encrypted-media; fullscreen"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- MERCH MODAL (Shopify Buy Button) -->
+  <div class="overlay" id="merchOverlay" aria-hidden="true" style="z-index:10000;">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="merchTitle">
+      <div class="modalhead">
+        <h3 id="merchTitle">TFPCOIN Merch</h3>
+        <button class="modalclose" id="merchClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modalbody">
+        <div class="small" style="margin-bottom:10px;">Secure checkout powered by Shopify.</div>
+        <div style="display:flex;justify-content:center;flex-wrap:wrap;">
+          <div id="product-component-1769653146260"></div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer>
-  © 2026 TFPCOIN. All Rights Reserved. | Web3 Powered
-</footer>
+  <!-- Main Scripts -->
+  <script>
+    // ====== CONFIG ======
+    const TFPCOIN = {
+      address: "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B",
+      symbol: "TFP",
+      decimals: 18
+    };
 
-<script>
-  function copyTokenAddress() {
-    const addr = (document.getElementById('tokenAddress')?.innerText || '').trim();
-    navigator.clipboard.writeText(addr).then(() => {
-      alert('Contract address copied!');
-    }).catch(() => {
-      alert('Could not copy automatically. Please highlight and copy the address.');
+    // Polygon Mainnet chainId
+    const POLYGON = {
+      chainIdHex: "0x89",
+      chainName: "Polygon Mainnet",
+      nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
+      rpcUrls: ["https://polygon-rpc.com/"],
+      blockExplorerUrls: ["https://polygonscan.com/"]
+    };
+
+    // Links
+    document.getElementById("btnScan").href = "https://polygonscan.com/token/" + TFPCOIN.address;
+    document.getElementById("btnChart").href = "https://dexscreener.com/polygon/" + TFPCOIN.address;
+
+    // ====== MODALS ======
+    const swapOverlay = document.getElementById("swapOverlay");
+    const merchOverlay = document.getElementById("merchOverlay");
+    const swapFrame = document.getElementById("swapFrame");
+
+    const QUICKSWAP_URL = "https://quickswap.exchange/#/swap?currency1=" + encodeURIComponent(TFPCOIN.address);
+
+    function openSwap(){
+      swapFrame.src = QUICKSWAP_URL; // load on open
+      swapOverlay.classList.add("open");
+      swapOverlay.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeSwap(){
+      swapOverlay.classList.remove("open");
+      swapOverlay.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+      swapFrame.src = "";
+    }
+
+    function openMerch(){
+      merchOverlay.classList.add("open");
+      merchOverlay.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeMerch(){
+      merchOverlay.classList.remove("open");
+      merchOverlay.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("btnBuy").addEventListener("click", openSwap);
+    document.getElementById("swapClose").addEventListener("click", closeSwap);
+    swapOverlay.addEventListener("click", (e)=>{ if(e.target===swapOverlay) closeSwap(); });
+
+    document.getElementById("btnMerch").addEventListener("click", openMerch);
+    document.getElementById("merchClose").addEventListener("click", closeMerch);
+    merchOverlay.addEventListener("click", (e)=>{ if(e.target===merchOverlay) closeMerch(); });
+
+    document.addEventListener("keydown", (e)=>{
+      if(e.key==="Escape"){
+        if(swapOverlay.classList.contains("open")) closeSwap();
+        if(merchOverlay.classList.contains("open")) closeMerch();
+      }
     });
-  }
 
-  async function connectWallet() {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        document.getElementById('walletAddress').innerText = 'Connected: ' + accounts[0];
-      } catch (error) {
-        alert('Connection request rejected');
+    // ====== WALLET CONNECT + NETWORK ======
+    async function getChainId(){
+      if(!window.ethereum) return null;
+      return await window.ethereum.request({ method: "eth_chainId" });
+    }
+
+    async function checkNetworkPill(){
+      const pill = document.getElementById("pillNetwork");
+      if(!window.ethereum){
+        pill.textContent = "Network: No wallet";
+        pill.className = "pill warn";
+        return;
+      }
+      const chainId = await getChainId();
+      if(chainId === POLYGON.chainIdHex){
+        pill.textContent = "Network: Polygon ✅";
+        pill.className = "pill good";
+      } else {
+        pill.textContent = "Network: Wrong network";
+        pill.className = "pill warn";
+      }
+    }
+
+    async function switchToPolygon(){
+      if(!window.ethereum) return alert("MetaMask not detected. Please install MetaMask.");
+      try{
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: POLYGON.chainIdHex }]
+        });
+      } catch (err){
+        // If chain not added
+        if(err && err.code === 4902){
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{
+              chainId: POLYGON.chainIdHex,
+              chainName: POLYGON.chainName,
+              nativeCurrency: POLYGON.nativeCurrency,
+              rpcUrls: POLYGON.rpcUrls,
+              blockExplorerUrls: POLYGON.blockExplorerUrls
+            }]
+          });
+        } else {
+          console.log(err);
+        }
+      }
+      await checkNetworkPill();
+    }
+
+    async function connectWallet(){
+      if(!window.ethereum) return alert("MetaMask not detected. Please install MetaMask.");
+      try{
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const addr = accounts?.[0];
+        if(addr){
+          const pill = document.getElementById("pillWallet");
+          pill.textContent = "Wallet: " + addr.slice(0,6) + "..." + addr.slice(-4);
+          pill.className = "pill good";
+        }
+        await checkNetworkPill();
+      } catch(e){
+        alert("Connection request rejected.");
+      }
+    }
+
+    document.getElementById("btnConnect").addEventListener("click", connectWallet);
+    document.getElementById("btnSwitch").addEventListener("click", switchToPolygon);
+
+    // ====== COPY + ADD TOKEN ======
+    document.getElementById("btnCopy").addEventListener("click", async ()=>{
+      try{
+        await navigator.clipboard.writeText(TFPCOIN.address);
+        alert("Contract copied!");
+      } catch(e){
+        alert("Copy failed. Please highlight and copy manually.");
+      }
+    });
+
+    document.getElementById("btnAddMM").addEventListener("click", async ()=>{
+      if(!window.ethereum) return alert("MetaMask not detected.");
+      try{
+        await window.ethereum.request({
+          method: "wallet_watchAsset",
+          params: {
+            type: "ERC20",
+            options: {
+              address: TFPCOIN.address,
+              symbol: TFPCOIN.symbol,
+              decimals: TFPCOIN.decimals
+            }
+          }
+        });
+      } catch(e){
+        alert("Could not add token. Make sure you're connected to MetaMask.");
+      }
+    });
+
+    // ====== LIVE PRICE + MARKET CAP via DexScreener ======
+    // NOTE: This works once DexScreener indexes your pair. If not, it will show "—".
+    async function loadDexData(){
+      const priceEl = document.getElementById("priceUsd");
+      const mcEl = document.getElementById("mcUsd");
+      const tfp70El = document.getElementById("tfpFor70");
+      const noteEl = document.getElementById("priceNote");
+
+      try{
+        const url = "https://api.dexscreener.com/latest/dex/tokens/" + TFPCOIN.address;
+        const res = await fetch(url, { cache: "no-store" });
+        if(!res.ok) throw new Error("DexScreener not available");
+        const data = await res.json();
+
+        const pair = data?.pairs?.[0];
+        const priceUsd = parseFloat(pair?.priceUsd || "NaN");
+        const fdv = pair?.fdv; // usually a number
+
+        if(!isFinite(priceUsd)){
+          priceEl.textContent = "—";
+          mcEl.textContent = "—";
+          tfp70El.textContent = "—";
+          noteEl.textContent = "Not indexed yet. Try again soon.";
+          return;
+        }
+
+        priceEl.textContent = "$" + priceUsd.toFixed(priceUsd < 0.01 ? 8 : 4);
+        noteEl.textContent = "Updated from DexScreener.";
+
+        if(fdv){
+          mcEl.textContent = "$" + Number(fdv).toLocaleString();
+        } else {
+          mcEl.textContent = "—";
+        }
+
+        // $70 conversion
+        const tfpNeeded = 70 / priceUsd;
+        tfp70El.textContent = Math.round(tfpNeeded).toLocaleString();
+
+      } catch(e){
+        priceEl.textContent = "—";
+        mcEl.textContent = "—";
+        tfp70El.textContent = "—";
+        noteEl.textContent = "Price source unavailable yet.";
+      }
+    }
+
+    // Initial load
+    checkNetworkPill();
+    loadDexData();
+    // Refresh price every 60 seconds
+    setInterval(loadDexData, 60000);
+
+    // If user changes network/accounts
+    if(window.ethereum){
+      window.ethereum.on?.("chainChanged", ()=>checkNetworkPill());
+      window.ethereum.on?.("accountsChanged", ()=>connectWallet());
+    }
+  </script>
+
+  <!-- Shopify Buy Button (your provided embed) -->
+  <script type="text/javascript">
+  (function () {
+    var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+    if (window.ShopifyBuy) {
+      if (window.ShopifyBuy.UI) {
+        ShopifyBuyInit();
+      } else {
+        loadScript();
       }
     } else {
-      alert('MetaMask not detected. Please install MetaMask.');
+      loadScript();
     }
-  }
-
-  // ✅ Buy modal open/close
-  function openBuyModal() {
-    const m = document.getElementById('buyModal');
-    if (m) m.style.display = 'flex';
-    loadSwapWidget();
-  }
-
-  function closeBuyModal() {
-    const m = document.getElementById('buyModal');
-    if (m) m.style.display = 'none';
-  }
-
-  // Close modal if user clicks outside the box
-  document.getElementById('buyModal')?.addEventListener('click', (e) => {
-    if (e.target && e.target.id === 'buyModal') closeBuyModal();
-  });
-
-  // ✅ Swap links
-  const TFPCOIN_ADDRESS = "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B";
-  const quickswapLink = "https://quickswap.exchange/#/swap?outputCurrency=" + TFPCOIN_ADDRESS;
-  const buySwapBtn = document.getElementById('buySwapBtn');
-  if (buySwapBtn) buySwapBtn.href = quickswapLink;
-
-  // ✅ Embedded swap iframe (Uniswap prefilled to Polygon + TFPCOIN)
-  let widgetLoaded = false;
-  function loadSwapWidget() {
-    if (widgetLoaded) return;
-    widgetLoaded = true;
-    const container = document.getElementById('swapWidget');
-    if (!container) return;
-
-    const iframe = document.createElement('iframe');
-    iframe.src = "https://app.uniswap.org/#/swap?chain=polygon&inputCurrency=POL&outputCurrency=0x59EB0583C532c0EF4e887308d8D477e48d02f7F8"
-    iframe.style.width = "100%";
-    iframe.style.height = "520px";
-    iframe.style.border = "1px solid rgba(255,255,255,0.12)";
-    iframe.style.borderRadius = "14px";
-    iframe.style.background = "#0b0b0f";
-
-    container.innerHTML = "";
-    container.appendChild(iframe);
-  }
-
-</script>
-
+    function loadScript() {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = scriptURL;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+      script.onload = ShopifyBuyInit;
+    }
+    function ShopifyBuyInit() {
+      var client = ShopifyBuy.buildClient({
+        domain: 'z4qefk-85.myshopify.com',
+        storefrontAccessToken: '31f257118ca68b69b2444216cdeb80d7',
+      });
+      ShopifyBuy.UI.onReady(client).then(function (ui) {
+        ui.createComponent('product', {
+          id: '10360105107758',
+          node: document.getElementById('product-component-1769653146260'),
+          moneyFormat: '%24%7B%7Bamount%7D%7D',
+          options: {
+            "product": {
+              "styles": {
+                "product": {
+                  "@media (min-width: 601px)": {
+                    "max-width": "calc(100% - 0px)",
+                    "margin-left": "0px",
+                    "margin-bottom": "10px"
+                  }
+                },
+                "button": {
+                  "font-family": "Montserrat, sans-serif",
+                  ":hover": { "background-color": "#7f4ea4" },
+                  "background-color": "#8d57b6",
+                  ":focus": { "background-color": "#7f4ea4" }
+                }
+              },
+              "buttonDestination": "checkout",
+              "text": { "button": "Buy now" },
+              "googleFonts": [ "Montserrat" ]
+            },
+            "modalProduct": {
+              "contents": {
+                "img": false,
+                "imgWithCarousel": true,
+                "button": false,
+                "buttonWithQuantity": true
+              },
+              "styles": {
+                "button": {
+                  "font-family": "Montserrat, sans-serif",
+                  ":hover": { "background-color": "#7f4ea4" },
+                  "background-color": "#8d57b6",
+                  ":focus": { "background-color": "#7f4ea4" }
+                }
+              },
+              "googleFonts": [ "Montserrat" ],
+              "text": { "button": "Add to cart" }
+            },
+            "cart": {
+              "styles": {
+                "button": {
+                  "font-family": "Montserrat, sans-serif",
+                  ":hover": { "background-color": "#7f4ea4" },
+                  "background-color": "#8d57b6",
+                  ":focus": { "background-color": "#7f4ea4" }
+                }
+              },
+              "text": { "total": "Subtotal", "button": "Checkout" },
+              "googleFonts": [ "Montserrat" ]
+            },
+            "toggle": {
+              "styles": {
+                "toggle": {
+                  "font-family": "Montserrat, sans-serif",
+                  "background-color": "#8d57b6",
+                  ":hover": { "background-color": "#7f4ea4" },
+                  ":focus": { "background-color": "#7f4ea4" }
+                }
+              },
+              "googleFonts": [ "Montserrat" ]
+            }
+          }
+        });
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
