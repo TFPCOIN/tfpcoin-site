@@ -550,7 +550,9 @@
     const merchOverlay = document.getElementById("merchOverlay");
     const swapFrame = document.getElementById("swapFrame");
 
-    const QUICKSWAP_URL = "https://quickswap.exchange/#/swap?currency1=" + encodeURIComponent(TFPCOIN.address);
+    const QUICKSWAP_URL =
+  "https://quickswap.exchange/#/swap?currency0=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&currency1=" 
+  + encodeURIComponent(TFPCOIN.address);
 
     function openSwap(){
       swapFrame.src = QUICKSWAP_URL; // load on open
