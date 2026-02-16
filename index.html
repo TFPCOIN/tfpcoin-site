@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TFPCOIN</title>
 
-  <!-- ✅ Favicon (put favicon.png in the SAME folder as this HTML) -->
+  <!-- ✅ Favicon (put favicon.png in SAME folder as index.html) -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <style>
@@ -251,14 +251,6 @@
 
     .modalbody{ padding: 14px 16px 16px; }
 
-    iframe.swapframe{
-      width: 100%;
-      height: min(72vh, 680px);
-      border: 0;
-      border-radius: 14px;
-      background: #fff;
-    }
-
     .small{
       font-size: 12px;
       color: rgba(255,255,255,0.65);
@@ -272,17 +264,17 @@
     <header>
       <div class="topbar">
         <div class="brand">
-          <!-- ✅ Logo (put logo.png in the SAME folder as this HTML) -->
+          <!-- ✅ Logo (put logo.png in SAME folder as index.html) -->
           <img src="logo.png" alt="TFPCOIN Logo" />
           <div>
             <h1>TFPCOIN</h1>
+            <!-- ✅ removed “Polygon Token / Official Website” line -->
           </div>
         </div>
 
         <div class="btnrow">
           <button class="btn primary" id="btnBuy">Buy TFPCOIN</button>
           <button class="btn" id="btnMerch">KARI'S CLOSET</button>
-          <!-- ✅ Whitepaper (keep your file here) -->
           <a class="btn" href="assets/TFPCOIN_Whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a>
           <button class="btn" id="btnConnect">Connect Wallet</button>
         </div>
@@ -292,7 +284,7 @@
         <h2>The Future of Digital Value</h2>
         <p>
           TFPCOIN is built for community, utility, and real-world digital commerce.
-          Buy TFPCOIN instantly, verify the contract, and shop official merch directly from this site.
+          Buy TFPCOIN, verify the contract, and shop official merch directly from this site.
         </p>
 
         <div class="pillrow" style="margin-top:14px;">
@@ -347,9 +339,8 @@
       <div class="card">
         <h3>How to Buy TFPCOIN</h3>
         <ol class="list">
-          <li>Click <b>Buy TFPCOIN</b>.</li>
-          <li>Connect MetaMask / wallet in the swap widget.</li>
-          <li>Make sure you are on <b>Polygon</b> network.</li>
+          <li>Click <b>Buy TFPCOIN</b> (opens a new tab).</li>
+          <li>In Uniswap, make sure you’re on <b>Polygon</b>.</li>
           <li>Swap <b>USDC → TFPCOIN</b>.</li>
           <li>Click <b>Add TFPCOIN to MetaMask</b> to display your balance.</li>
         </ol>
@@ -365,7 +356,6 @@
 
         <div class="line"></div>
 
-        <!-- ✅ Quick Actions back -->
         <h3>Quick Actions</h3>
         <div class="btnrow" style="justify-content:flex-start;">
           <button class="btn" id="btnSwitch">Switch to Polygon</button>
@@ -373,28 +363,12 @@
         </div>
 
         <p class="small" style="margin-top:12px;">
-          If the swap doesn’t load inside the modal, you can still use “View Chart” and swap from your wallet app.
+          If Uniswap still asks you to “Select token”, search the contract address and import TFPCOIN once.
         </p>
       </div>
     </div>
 
     <footer>© 2026 TFPCOIN. All Rights Reserved.</footer>
-  </div>
-
-  <!-- BUY TFPCOIN MODAL (Uniswap on Polygon, USDC -> TFPCOIN) -->
-  <div class="overlay" id="swapOverlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
-      <div class="modalhead">
-        <h3 id="swapTitle">Buy TFPCOIN</h3>
-        <button class="modalclose" id="swapClose" aria-label="Close">✕</button>
-      </div>
-      <div class="modalbody">
-        <div class="small" style="margin-bottom:10px;">
-          Default pair: <b>USDC → TFPCOIN</b> on Polygon.
-        </div>
-        <iframe class="swapframe" id="swapFrame" title="Swap TFPCOIN" allow="clipboard-write; encrypted-media; fullscreen"></iframe>
-      </div>
-    </div>
   </div>
 
   <!-- MERCH MODAL (Shopify Buy Button) -->
@@ -414,260 +388,248 @@
   </div>
 
   <script>
-    // ====== CONFIG ======
-    const TFPCOIN = {
-      address: "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B",
-      symbol: "TFP",
-      decimals: 18
-    };
+    document.addEventListener("DOMContentLoaded", () => {
+      // ====== CONFIG ======
+      const TFPCOIN = {
+        address: "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B",
+        symbol: "TFP",
+        decimals: 18
+      };
 
-    // Polygon Mainnet chainId
-    const POLYGON = {
-      chainIdHex: "0x89",
-      chainName: "Polygon Mainnet",
-      nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
-      rpcUrls: ["https://polygon-rpc.com/"],
-      blockExplorerUrls: ["https://polygonscan.com/"]
-    };
+      const POLYGON = {
+        chainIdHex: "0x89",
+        chainName: "Polygon Mainnet",
+        nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
+        rpcUrls: ["https://polygon-rpc.com/"],
+        blockExplorerUrls: ["https://polygonscan.com/"]
+      };
 
-    // USDC on Polygon (common)
-    const USDC_POLYGON = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
+      const USDC_POLYGON = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
 
-    // Links
-    document.getElementById("btnScan").href = "https://polygonscan.com/token/" + TFPCOIN.address;
-    document.getElementById("btnChart").href = "https://dexscreener.com/polygon/" + TFPCOIN.address;
+      // Links
+      const btnScan = document.getElementById("btnScan");
+      const btnChart = document.getElementById("btnChart");
+      if (btnScan) btnScan.href = "https://polygonscan.com/token/" + TFPCOIN.address;
+      if (btnChart) btnChart.href = "https://dexscreener.com/polygon/" + TFPCOIN.address;
 
-    // ====== MODALS ======
-    const swapOverlay = document.getElementById("swapOverlay");
-    const merchOverlay = document.getElementById("merchOverlay");
-    const swapFrame = document.getElementById("swapFrame");
+      // ====== BUY (NEW TAB) ======
+      const UNISWAP_URL =
+        "https://app.uniswap.org/#/swap" +
+        "?chain=polygon" +
+        "&inputCurrency=" + encodeURIComponent(USDC_POLYGON) +
+        "&outputCurrency=" + encodeURIComponent(TFPCOIN.address) +
+        "&theme=dark";
 
-    // ✅ Define addresses as STRINGS
-// ===== Swap config (QuickSwap) =====
-const SWAP_URL =
-  "https://quickswap.exchange/#/swap" +
-  "?inputCurrency=0x2791bca1f2de4661ed88a30c99a7a9449aa84174" +
-  "&outputCurrency=0xcec2f2b98b98f5ac69e819c7ec3627162cf8c21b";
-
-function openSwap(){
-  window.open(SWAP_URL, "_blank");
-}
-
-
-
-
-
-    function openMerch(){
-      merchOverlay.classList.add("open");
-      merchOverlay.setAttribute("aria-hidden","false");
-      document.body.style.overflow = "hidden";
-      renderShopifyOnce();
-    }
-    function closeMerch(){
-      merchOverlay.classList.remove("open");
-      merchOverlay.setAttribute("aria-hidden","true");
-      document.body.style.overflow = "";
-    }
-
-    document.getElementById("btnBuy").addEventListener("click", openSwap);
-    document.getElementById("swapClose").addEventListener("click", closeSwap);
-    swapOverlay.addEventListener("click", (e)=>{ if(e.target===swapOverlay) closeSwap(); });
-
-    document.getElementById("btnMerch").addEventListener("click", openMerch);
-    document.getElementById("merchClose").addEventListener("click", closeMerch);
-    merchOverlay.addEventListener("click", (e)=>{ if(e.target===merchOverlay) closeMerch(); });
-
-    document.addEventListener("keydown", (e)=>{
-      if(e.key==="Escape"){
-        if(swapOverlay.classList.contains("open")) closeSwap();
-        if(merchOverlay.classList.contains("open")) closeMerch();
+      function openSwapNewTab(){
+        window.open(UNISWAP_URL, "_blank", "noopener");
       }
-    });
 
-    // ====== WALLET CONNECT + NETWORK ======
-    async function getChainId(){
-      if(!window.ethereum) return null;
-      return await window.ethereum.request({ method: "eth_chainId" });
-    }
+      document.getElementById("btnBuy")?.addEventListener("click", openSwapNewTab);
 
-    async function checkNetworkPill(){
-      const pill = document.getElementById("pillNetwork");
-      if(!window.ethereum){
-        pill.textContent = "Network: No wallet";
-        pill.className = "pill warn";
-        return;
+      // ====== MERCH MODAL ======
+      const merchOverlay = document.getElementById("merchOverlay");
+      const merchClose = document.getElementById("merchClose");
+
+      function openMerch(){
+        merchOverlay.classList.add("open");
+        merchOverlay.setAttribute("aria-hidden","false");
+        document.body.style.overflow = "hidden";
+        renderShopifyOnce();
       }
-      const chainId = await getChainId();
-      if(chainId === POLYGON.chainIdHex){
-        pill.textContent = "Network: Polygon ✅";
-        pill.className = "pill good";
-      } else {
-        pill.textContent = "Network: Wrong network";
-        pill.className = "pill warn";
+      function closeMerch(){
+        merchOverlay.classList.remove("open");
+        merchOverlay.setAttribute("aria-hidden","true");
+        document.body.style.overflow = "";
       }
-    }
 
-    async function switchToPolygon(){
-      if(!window.ethereum) return alert("MetaMask not detected. Please install MetaMask.");
-      try{
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: POLYGON.chainIdHex }]
-        });
-      } catch (err){
-        if(err && err.code === 4902){
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [{
-              chainId: POLYGON.chainIdHex,
-              chainName: POLYGON.chainName,
-              nativeCurrency: POLYGON.nativeCurrency,
-              rpcUrls: POLYGON.rpcUrls,
-              blockExplorerUrls: POLYGON.blockExplorerUrls
-            }]
-          });
-        }
+      document.getElementById("btnMerch")?.addEventListener("click", openMerch);
+      merchClose?.addEventListener("click", closeMerch);
+      merchOverlay?.addEventListener("click", (e)=>{ if(e.target===merchOverlay) closeMerch(); });
+
+      document.addEventListener("keydown", (e)=>{
+        if(e.key==="Escape" && merchOverlay?.classList.contains("open")) closeMerch();
+      });
+
+      // ====== WALLET CONNECT + NETWORK ======
+      async function getChainId(){
+        if(!window.ethereum) return null;
+        return await window.ethereum.request({ method: "eth_chainId" });
       }
-      await checkNetworkPill();
-    }
 
-    async function connectWallet(){
-      if(!window.ethereum) return alert("MetaMask not detected. Please install MetaMask.");
-      try{
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-        const addr = accounts?.[0];
-        if(addr){
-          const pill = document.getElementById("pillWallet");
-          pill.textContent = "Wallet: " + addr.slice(0,6) + "..." + addr.slice(-4);
-          pill.className = "pill good";
-        }
-        await checkNetworkPill();
-      } catch(e){
-        alert("Connection request rejected.");
-      }
-    }
+      async function checkNetworkPill(){
+        const pill = document.getElementById("pillNetwork");
+        if(!pill) return;
 
-    document.getElementById("btnConnect").addEventListener("click", connectWallet);
-    document.getElementById("btnSwitch").addEventListener("click", switchToPolygon);
-
-    // ====== COPY + ADD TOKEN ======
-    document.getElementById("btnCopy").addEventListener("click", async ()=>{
-      try{
-        await navigator.clipboard.writeText(TFPCOIN.address);
-        alert("Contract copied!");
-      } catch(e){
-        alert("Copy failed. Please highlight and copy manually.");
-      }
-    });
-
-    document.getElementById("btnAddMM").addEventListener("click", async ()=>{
-      if(!window.ethereum) return alert("MetaMask not detected.");
-      try{
-        await window.ethereum.request({
-          method: "wallet_watchAsset",
-          params: {
-            type: "ERC20",
-            options: {
-              address: TFPCOIN.address,
-              symbol: TFPCOIN.symbol,
-              decimals: TFPCOIN.decimals
-            }
-          }
-        });
-      } catch(e){
-        alert("Could not add token. Make sure you're connected to MetaMask.");
-      }
-    });
-
-    // ====== LIVE PRICE + MARKET CAP via DexScreener ======
-    async function loadDexData(){
-      const priceEl = document.getElementById("priceUsd");
-      const mcEl = document.getElementById("mcUsd");
-      const tfp70El = document.getElementById("tfpFor70");
-      const noteEl = document.getElementById("priceNote");
-
-      try{
-        const url = "https://api.dexscreener.com/latest/dex/tokens/" + TFPCOIN.address;
-        const res = await fetch(url, { cache: "no-store" });
-        if(!res.ok) throw new Error("DexScreener not available");
-        const data = await res.json();
-
-        const pair = data?.pairs?.[0];
-        const priceUsd = parseFloat(pair?.priceUsd || "NaN");
-        const fdv = pair?.fdv;
-
-        if(!isFinite(priceUsd)){
-          priceEl.textContent = "—";
-          mcEl.textContent = "—";
-          tfp70El.textContent = "—";
-          noteEl.textContent = "Not indexed yet. Try again soon.";
+        if(!window.ethereum){
+          pill.textContent = "Network: No wallet";
+          pill.className = "pill warn";
           return;
         }
-
-        priceEl.textContent = "$" + priceUsd.toFixed(priceUsd < 0.01 ? 8 : 4);
-        noteEl.textContent = "Updated from DexScreener.";
-
-        mcEl.textContent = fdv ? ("$" + Number(fdv).toLocaleString()) : "—";
-
-        const tfpNeeded = 70 / priceUsd;
-        tfp70El.textContent = Math.round(tfpNeeded).toLocaleString();
-
-      } catch(e){
-        priceEl.textContent = "—";
-        mcEl.textContent = "—";
-        tfp70El.textContent = "—";
-        noteEl.textContent = "Price source unavailable yet.";
+        const chainId = await getChainId();
+        if(chainId === POLYGON.chainIdHex){
+          pill.textContent = "Network: Polygon ✅";
+          pill.className = "pill good";
+        } else {
+          pill.textContent = "Network: Wrong network";
+          pill.className = "pill warn";
+        }
       }
-    }
 
-    checkNetworkPill();
-    loadDexData();
-    setInterval(loadDexData, 60000);
+      async function switchToPolygon(){
+        if(!window.ethereum) return alert("MetaMask not detected. Please install MetaMask.");
+        try{
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: POLYGON.chainIdHex }]
+          });
+        } catch (err){
+          if(err && err.code === 4902){
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [{
+                chainId: POLYGON.chainIdHex,
+                chainName: POLYGON.chainName,
+                nativeCurrency: POLYGON.nativeCurrency,
+                rpcUrls: POLYGON.rpcUrls,
+                blockExplorerUrls: POLYGON.blockExplorerUrls
+              }]
+            });
+          }
+        }
+        await checkNetworkPill();
+      }
 
-    if(window.ethereum){
-      window.ethereum.on?.("chainChanged", ()=>checkNetworkPill());
-      window.ethereum.on?.("accountsChanged", ()=>connectWallet());
-    }
+      async function connectWallet(){
+        if(!window.ethereum) return alert("MetaMask not detected. Please install MetaMask.");
+        try{
+          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+          const addr = accounts?.[0];
+          const pill = document.getElementById("pillWallet");
+          if(addr && pill){
+            pill.textContent = "Wallet: " + addr.slice(0,6) + "..." + addr.slice(-4);
+            pill.className = "pill good";
+          }
+          await checkNetworkPill();
+        } catch(e){
+          alert("Connection request rejected.");
+        }
+      }
 
-    // ====== SHOPIFY (render ONCE — fixes “double” issue) ======
-    let shopifyMounted = false;
+      document.getElementById("btnConnect")?.addEventListener("click", connectWallet);
+      document.getElementById("btnSwitch")?.addEventListener("click", switchToPolygon);
 
-    function renderShopifyOnce() {
-      if (shopifyMounted) return;
+      // ====== COPY + ADD TOKEN ======
+      document.getElementById("btnCopy")?.addEventListener("click", async ()=>{
+        try{ await navigator.clipboard.writeText(TFPCOIN.address); alert("Contract copied!"); }
+        catch(e){ alert("Copy failed. Please copy manually."); }
+      });
 
-      const mountNode = document.getElementById("product-component-1769653146260");
-      if (!mountNode) return;
+      document.getElementById("btnAddMM")?.addEventListener("click", async ()=>{
+        if(!window.ethereum) return alert("MetaMask not detected.");
+        try{
+          await window.ethereum.request({
+            method: "wallet_watchAsset",
+            params: {
+              type: "ERC20",
+              options: {
+                address: TFPCOIN.address,
+                symbol: TFPCOIN.symbol,
+                decimals: TFPCOIN.decimals
+              }
+            }
+          });
+        } catch(e){
+          alert("Could not add token. Make sure you're connected to MetaMask.");
+        }
+      });
 
-      const scriptURL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
+      // ====== LIVE PRICE via DexScreener ======
+      async function loadDexData(){
+        const priceEl = document.getElementById("priceUsd");
+        const mcEl = document.getElementById("mcUsd");
+        const tfp70El = document.getElementById("tfpFor70");
+        const noteEl = document.getElementById("priceNote");
 
-      function mount() {
-        const client = ShopifyBuy.buildClient({
-          domain: "z4qefk-85.myshopify.com",
-          storefrontAccessToken: "31f257118ca68b69b2444216cdeb80d7",
-        });
+        try{
+          const url = "https://api.dexscreener.com/latest/dex/tokens/" + TFPCOIN.address;
+          const res = await fetch(url, { cache: "no-store" });
+          if(!res.ok) throw new Error("DexScreener not available");
+          const data = await res.json();
 
-        ShopifyBuy.UI.onReady(client).then(function (ui) {
-          ui.createComponent("product", {
-            id: "10360105107758",
-            node: mountNode,
-            moneyFormat: "%24%7B%7Bamount%7D%7D",
-            options: { product: { buttonDestination: "checkout" } }
+          const pair = data?.pairs?.[0];
+          const priceUsd = parseFloat(pair?.priceUsd || "NaN");
+          const fdv = pair?.fdv;
+
+          if(!isFinite(priceUsd)){
+            if (priceEl) priceEl.textContent = "—";
+            if (mcEl) mcEl.textContent = "—";
+            if (tfp70El) tfp70El.textContent = "—";
+            if (noteEl) noteEl.textContent = "Not indexed yet. Try again soon.";
+            return;
+          }
+
+          if (priceEl) priceEl.textContent = "$" + priceUsd.toFixed(priceUsd < 0.01 ? 8 : 4);
+          if (noteEl) noteEl.textContent = "Updated from DexScreener.";
+          if (mcEl) mcEl.textContent = fdv ? ("$" + Number(fdv).toLocaleString()) : "—";
+          if (tfp70El) tfp70El.textContent = Math.round(70 / priceUsd).toLocaleString();
+
+        } catch(e){
+          if (priceEl) priceEl.textContent = "—";
+          if (mcEl) mcEl.textContent = "—";
+          if (tfp70El) tfp70El.textContent = "—";
+          if (noteEl) noteEl.textContent = "Price source unavailable yet.";
+        }
+      }
+
+      checkNetworkPill();
+      loadDexData();
+      setInterval(loadDexData, 60000);
+
+      if(window.ethereum){
+        window.ethereum.on?.("chainChanged", ()=>checkNetworkPill());
+      }
+
+      // ====== SHOPIFY (render ONCE — fixes “double” issue) ======
+      let shopifyMounted = false;
+
+      function renderShopifyOnce() {
+        if (shopifyMounted) return;
+
+        const mountNode = document.getElementById("product-component-1769653146260");
+        if (!mountNode) return;
+
+        const scriptURL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
+
+        function mount() {
+          const client = ShopifyBuy.buildClient({
+            domain: "z4qefk-85.myshopify.com",
+            storefrontAccessToken: "31f257118ca68b69b2444216cdeb80d7",
           });
 
-          shopifyMounted = true;
-        });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent("product", {
+              id: "10360105107758",
+              node: mountNode,
+              moneyFormat: "%24%7B%7Bamount%7D%7D",
+              options: { product: { buttonDestination: "checkout" } }
+            });
+            shopifyMounted = true;
+          });
+        }
+
+        if (window.ShopifyBuy && window.ShopifyBuy.UI) mount();
+        else {
+          const s = document.createElement("script");
+          s.async = true;
+          s.src = scriptURL;
+          s.onload = mount;
+          document.head.appendChild(s);
+        }
       }
 
-      if (window.ShopifyBuy && window.ShopifyBuy.UI) {
-        mount();
-      } else {
-        const s = document.createElement("script");
-        s.async = true;
-        s.src = scriptURL;
-        s.onload = mount;
-        document.head.appendChild(s);
-      }
-    }
+      // expose for openMerch()
+      window.renderShopifyOnce = renderShopifyOnce;
+    });
   </script>
 </body>
 </html>
