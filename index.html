@@ -414,18 +414,19 @@
 
       // ====== BUY (NEW TAB) ======
       const TFPCOIN_ADDRESS = "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B";
-const WMATIC_POLYGON = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
+      const WMATIC_POLYGON = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
 
-const SWAP_URL =
-  "https://app.uniswap.org/#/swap" +
-  "?chain=polygon" +
-  "&inputCurrency=" + WMATIC_POLYGON +
-  "&outputCurrency=" + TFPCOIN_ADDRESS +
-  "&theme=dark";
+      const SWAP_URL =
+      "https://app.uniswap.org/#/swap" +
+      "?chain=polygon" +
+      "&inputCurrency=" + WMATIC_POLYGON +
+      "&outputCurrency=" + TFPCOIN_ADDRESS +
+      "&theme=dark";
 
-function openSwap() {
-  window.open(SWAP_URL, "_blank", "noopener");
+     function openSwap() {
+     window.open(SWAP_URL, "_blank", "noopener");
 }
+
 
 
       document.getElementById("btnBuy")?.addEventListener("click", openSwapNewTab);
