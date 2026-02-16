@@ -442,25 +442,33 @@
     const merchOverlay = document.getElementById("merchOverlay");
     const swapFrame = document.getElementById("swapFrame");
 
-    // ✅ Uniswap swap prefilled: USDC -> TFPCOIN, Polygon
-    const UNISWAP_URL =
-      "https://app.uniswap.org/#/swap" +
-      "?chain=polygon" +
-      "&inputCurrency=" + encodeURIComponent(USDC_POLYGON) +
-      "&outputCurrency=" + encodeURIComponent(0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B);
+    // ✅ Define addresses as STRINGS
+const TFPCOIN_ADDRESS = "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B";
+const USDC_POLYGON = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
 
-    function openSwap(){
-      swapFrame.src = UNISWAP_URL;
-      swapOverlay.classList.add("open");
-      swapOverlay.setAttribute("aria-hidden","false");
-      document.body.style.overflow = "hidden";
-    }
-    function closeSwap(){
-      swapOverlay.classList.remove("open");
-      swapOverlay.setAttribute("aria-hidden","true");
-      document.body.style.overflow = "";
-      swapFrame.src = "";
-    }
+// ✅ Uniswap swap prefilled: USDC -> TFPCOIN on Polygon
+const UNISWAP_URL =
+  "https://app.uniswap.org/#/swap" +
+  "?chain=polygon" +
+  "&inputCurrency=" + USDC_POLYGON +
+  "&outputCurrency=" + TFPCOIN_ADDRESS +
+  "&theme=dark";
+
+
+   function openSwap(){
+  swapFrame.src = UNISWAP_URL;
+  swapOverlay.classList.add("open");
+  swapOverlay.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+
+  function closeSwap(){
+  swapOverlay.classList.remove("open");
+  swapOverlay.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+  swapFrame.src = "";
+}
+
 
     function openMerch(){
       merchOverlay.classList.add("open");
