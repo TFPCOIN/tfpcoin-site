@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TFPCOIN</title>
 
-  <!-- ✅ Favicon (put favicon.png in SAME folder as index.html) -->
+  <!-- ✅ Put these files in the SAME folder as this index.html:
+       - favicon.png
+       - logo.png
+       - assets/TFPCOIN_Whitepaper.pdf
+  -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <style>
@@ -264,19 +268,17 @@
     <header>
       <div class="topbar">
         <div class="brand">
-          <!-- ✅ Logo (put logo.png in SAME folder as index.html) -->
           <img src="logo.png" alt="TFPCOIN Logo" />
           <div>
             <h1>TFPCOIN</h1>
-            <!-- ✅ removed “Polygon Token / Official Website” line -->
           </div>
         </div>
 
         <div class="btnrow">
-          <button class="btn primary" id="btnBuy">Buy TFPCOIN</button>
-          <button class="btn" id="btnMerch">KARI'S CLOSET</button>
+          <button class="btn primary" id="btnBuy" type="button">Buy TFPCOIN</button>
+          <button class="btn" id="btnMerch" type="button">KARI'S CLOSET</button>
           <a class="btn" href="assets/TFPCOIN_Whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a>
-          <button class="btn" id="btnConnect">Connect Wallet</button>
+          <button class="btn" id="btnConnect" type="button">Connect Wallet</button>
         </div>
       </div>
 
@@ -301,8 +303,8 @@
         <code id="tokenAddr">0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B</code>
 
         <div class="btnrow" style="justify-content:flex-start; margin-top:12px;">
-          <button class="btn" id="btnCopy">Copy Contract</button>
-          <button class="btn" id="btnAddMM">Add TFPCOIN to MetaMask</button>
+          <button class="btn" id="btnCopy" type="button">Copy Contract</button>
+          <button class="btn" id="btnAddMM" type="button">Add TFPCOIN to MetaMask</button>
           <a class="btn" id="btnScan" target="_blank" rel="noopener">View on PolygonScan</a>
         </div>
 
@@ -340,9 +342,8 @@
         <h3>How to Buy TFPCOIN</h3>
         <ol class="list">
           <li>Click <b>Buy TFPCOIN</b> (opens a new tab).</li>
-          <li>In Uniswap, make sure you’re on <b>Polygon</b>.</li>
-          <li>Swap <b>USDC → TFPCOIN</b>.</li>
-          <li>Click <b>Add TFPCOIN to MetaMask</b> to display your balance.</li>
+          <li>Uniswap will open on <b>Polygon</b> and try to swap from <b>MATIC/POL → TFPCOIN</b>.</li>
+          <li>If TFPCOIN doesn’t auto-load, paste the contract address and import once.</li>
         </ol>
 
         <div class="line"></div>
@@ -358,12 +359,13 @@
 
         <h3>Quick Actions</h3>
         <div class="btnrow" style="justify-content:flex-start;">
-          <button class="btn" id="btnSwitch">Switch to Polygon</button>
+          <button class="btn" id="btnSwitch" type="button">Switch to Polygon</button>
           <a class="btn" id="btnChart" target="_blank" rel="noopener">View Chart</a>
         </div>
 
         <p class="small" style="margin-top:12px;">
-          If Uniswap still asks you to “Select token”, search the contract address and import TFPCOIN once.
+          Note: Some wallets/browsers block auto-imported custom tokens inside Uniswap until you confirm once.
+          If you see “Select token”, paste the contract address and import TFPCOIN.
         </p>
       </div>
     </div>
@@ -376,7 +378,7 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="merchTitle">
       <div class="modalhead">
         <h3 id="merchTitle">KARI'S CLOSET</h3>
-        <button class="modalclose" id="merchClose" aria-label="Close">✕</button>
+        <button class="modalclose" id="merchClose" aria-label="Close" type="button">✕</button>
       </div>
       <div class="modalbody">
         <div class="small" style="margin-bottom:10px;">Secure checkout powered by Shopify.</div>
@@ -396,6 +398,7 @@
         decimals: 18
       };
 
+      // Polygon Mainnet chainId
       const POLYGON = {
         chainIdHex: "0x89",
         chainName: "Polygon Mainnet",
@@ -404,8 +407,6 @@
         blockExplorerUrls: ["https://polygonscan.com/"]
       };
 
-      const USDC_POLYGON = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
-
       // Links
       const btnScan = document.getElementById("btnScan");
       const btnChart = document.getElementById("btnChart");
@@ -413,21 +414,19 @@
       if (btnChart) btnChart.href = "https://dexscreener.com/polygon/" + TFPCOIN.address;
 
       // ====== BUY (NEW TAB) ======
-      const TFPCOIN_ADDRESS = "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B";
-      const WMATIC_POLYGON = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
-
+      // Default: Polygon + MATIC/POL -> TFPCOIN (no USD)
+      // Uniswap still may require manual token import the first time on some devices.
       const SWAP_URL =
-      "https://app.uniswap.org/#/swap" +
-      "?chain=polygon" +
-      "&inputCurrency=" + WMATIC_POLYGON +
-      "&outputCurrency=" + TFPCOIN_ADDRESS +
-      "&theme=dark";
+        "https://app.uniswap.org/#/swap" +
+        "?chain=polygon" +
+        "&inputCurrency=MATIC" +
+        "&outputCurrency=" + encodeURIComponent(TFPCOIN.address) +
+        "&theme=dark";
 
-     function openSwap() {
-     window.open(SWAP_URL, "_blank", "noopener");
-}
-
-
+      function openSwapNewTab(e){
+        e.preventDefault();
+        window.open(SWAP_URL, "_blank", "noopener");
+      }
 
       document.getElementById("btnBuy")?.addEventListener("click", openSwapNewTab);
 
@@ -439,7 +438,7 @@
         merchOverlay.classList.add("open");
         merchOverlay.setAttribute("aria-hidden","false");
         document.body.style.overflow = "hidden";
-        renderShopifyOnce();
+        window.renderShopifyOnce?.();
       }
       function closeMerch(){
         merchOverlay.classList.remove("open");
@@ -577,7 +576,6 @@
           if (noteEl) noteEl.textContent = "Updated from DexScreener.";
           if (mcEl) mcEl.textContent = fdv ? ("$" + Number(fdv).toLocaleString()) : "—";
           if (tfp70El) tfp70El.textContent = Math.round(70 / priceUsd).toLocaleString();
-
         } catch(e){
           if (priceEl) priceEl.textContent = "—";
           if (mcEl) mcEl.textContent = "—";
@@ -632,7 +630,7 @@
         }
       }
 
-      // expose for openMerch()
+      // expose for the merch modal open function
       window.renderShopifyOnce = renderShopifyOnce;
     });
   </script>
