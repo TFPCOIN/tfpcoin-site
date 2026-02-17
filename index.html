@@ -392,44 +392,51 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // ====== CONFIG ======
-      const TFPCOIN = {
-        address: "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B",
-        symbol: "TFP",
-        decimals: 18
-      };
+    const TFPCOIN = {
+      address: "0xcEc2f2b98B98f5ac69E819C7EC3627162cF8C21B",
+      symbol: "TFP",
+      decimals: 18
+    };
 
-      // Polygon Mainnet chainId
-      const POLYGON = {
-        chainIdHex: "0x89",
-        chainName: "Polygon Mainnet",
-        nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
-        rpcUrls: ["https://polygon-rpc.com/"],
-        blockExplorerUrls: ["https://polygonscan.com/"]
-      };
+    const POLYGON = {
+      chainIdHex: "0x89",
+      chainName: "Polygon Mainnet",
+      nativeCurrency: { name: "POL", symbol: "POL", decimals: 18 },
+      rpcUrls: ["https://polygon-rpc.com/"],
+      blockExplorerUrls: ["https://polygonscan.com/"]
+    };
 
-      // Links
-      const btnScan = document.getElementById("btnScan");
-      const btnChart = document.getElementById("btnChart");
-      if (btnScan) btnScan.href = "https://polygonscan.com/token/" + TFPCOIN.address;
-      if (btnChart) btnChart.href = "https://dexscreener.com/polygon/" + TFPCOIN.address;
+    // Native USDC on Polygon (Circle)
+    const USDC_POLYGON = "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359";
 
-      // ====== BUY (NEW TAB) ======
-      // Default: Polygon + MATIC/POL -> TFPCOIN (no USD)
-      // Uniswap still may require manual token import the first time on some devices.
-      const SWAP_URL =
-        "https://app.uniswap.org/#/swap" +
-        "?chain=polygon" +
-        "&inputCurrency=MATIC" +
-        "&outputCurrency=" + encodeURIComponent(TFPCOIN.address) +
-        "&theme=dark";
+    // Use QuickSwap WIDGET (better for iframe)
+    const QUICKSWAP_WIDGET_URL =
+      "https://widget.quickswap.exchange/#/swap" +
+      "?chainId=137" +
+      "&inputCurrency=" + encodeURIComponent(USDC_POLYGON) +
+      "&outputCurrency=" + encodeURIComponent(TFPCOIN.address);
 
-      function openSwapNewTab(e){
-        e.preventDefault();
-        window.open(SWAP_URL, "_blank", "noopener");
-      }
+    // Links
+    document.getElementById("btnScan").href = "https://polygonscan.com/token/" + TFPCOIN.address;
+    document.getElementById("btnChart").href = "https://dexscreener.com/polygon/" + TFPCOIN.address;
 
-      document.getElementById("btnBuy")?.addEventListener("click", openSwapNewTab);
+    // ====== MODALS ======
+    const swapOverlay = document.getElementById("swapOverlay");
+    const merchOverlay = document.getElementById("merchOverlay");
+    const swapFrame = document.getElementById("swapFrame");
 
+    function openSwap(){
+      swapFrame.src = QUICKSWAP_WIDGET_URL; // load on open
+      swapOverlay.classList.add("open");
+      swapOverlay.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeSwap(){
+      swapOverlay.classList.remove("open");
+      swapOverlay.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+      swapFrame.src = "";
+    }
       // ====== MERCH MODAL ======
       const merchOverlay = document.getElementById("merchOverlay");
       const merchClose = document.getElementById("merchClose");
